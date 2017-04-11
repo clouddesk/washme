@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block header %}
+    <a href="{% url 'car:new_car' %}"> <button name="submit" class="btn btn-Default">ავტომობილის დამატება</button></a>
+{% endblock header %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table">
+
+            <tr>
+                <th class="active">ნომერი</th>
+                <th class="active"></th>
+                <th class="active">კატეგორია</th>
+            </tr>
+
+            {% for mycar in my_cars %}
+
+                <tr>
+                    <td>
+                        {{ mycar.license_plate }}
+                    </td>
+                    <td>
+                        <form action="{% url 'car:delete_car' mycar.id %}" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {% buttons %}
+
+                                <button name="submit" class="btn btn-danger">
+                                    წაშლა
+                                </button>
+
+                            {% endbuttons %}
+                        </form>
+                    </td>
+                    <td>
+                        {{ mycar.get_category_display }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+{% endblock content %}

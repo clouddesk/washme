@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+
+{% block header %}
+    <h2>ბოქსის სტატუსის ცვლილება:</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <form action="{% url 'company:edit_box' box.id %}" method='post'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <button name="submit" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span>
+            ცვლილებების შენახვა
+        </button>
+    </form>
+
+{% endblock content %}

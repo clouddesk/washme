@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ car_wash.name }}<br><br>{{ car_wash.phone }}</h3>
+        </div>
+        <div class="row" style="margin-top: 20px">
+            {% for photo in photos %}
+                <div class="col-sm-4 col-md-3">
+                    <img src="{{ photo.file.url }}" class="thumbnail">
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th class="active">ბოქსი</th>
+            <th class="active">სტატუსი</th>
+            <th class="active">სტატუსის დრო</th>
+        </tr>
+        {% for box in boxes %}
+            <tr>
+                <td>
+                    {{ box.name }}
+                </td>
+
+                {% if box.available %}
+                    <td class="success">
+                        თავისუფალია
+                    </td>
+                {% else %}
+                    <td class="danger">
+                        დაკავებულია
+                    </td>
+                {% endif %}
+
+                <td>
+                    {{ box.modified_date|timesince }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

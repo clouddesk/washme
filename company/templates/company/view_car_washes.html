@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block header %}
+    <a href="{% url 'main:main' %}">
+        <button name="submit" class="btn btn-Default">რუქა</button>
+    </a>
+{% endblock header %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th class="active">სახელწოდება</th>
+                <th class="active">ტელეფონი</th>
+                <th class="active">სტატუსი</th>
+            </tr>
+
+            {% for car_wash in car_washes %}
+                <tr>
+                    <td>
+                        <a href="{% url 'company:view_car_wash' car_wash.phone %}">{{ car_wash }}</a>
+                    </td>
+                    <td>
+                        {{ car_wash.phone }}
+                    </td>
+                    {% if car_wash.available %}
+                        <td class="success">
+                            თავისუფალია
+                        </td>
+                    {% else %}
+                        <td class="danger">
+                            დაკავებულია
+                        </td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock content %}

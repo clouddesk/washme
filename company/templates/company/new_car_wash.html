@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2>ინფორმაცია სამრეცხაოს შესახებ:</h2>
+{% endblock header %}
+{% block content %}
+    {% load leaflet_tags %}
+    {% leaflet_js plugins="forms" %}
+    {% leaflet_css plugins="forms" %}
+    <form action="{% url 'company:new_car_wash' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+
+            <button name="submit" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> ახალი
+                სამრეცხაოს დამატება
+            </button>
+
+        {% endbuttons %}
+    </form>
+{% endblock content %}
